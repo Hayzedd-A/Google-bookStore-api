@@ -38,11 +38,6 @@
 
 // export default GoogleApi;
 
-
-
-
-
-
 // import React, { useEffect, useState } from "react";
 // import BooksList from "./BooksList";
 // import BookCard from "../BookCard";
@@ -108,19 +103,9 @@
 
 // export default GoogleApi;
 
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import BooksList from "./BooksList";
 import BookCard from "../BookCard";
-
 
 const GoogleApi = () => {
   const [books, setBooks] = useState([]);
@@ -156,13 +141,13 @@ const GoogleApi = () => {
             <h1 className="text-white text-2xl font-bold">
               DrucStoc. Bookstore
             </h1>
-            <div className="flex items-center space-x-4 rounded-lg">
+            <div className="flex bg-white border border-white items-center space-x-4 rounded-lg">
               <input
-                className="py-2 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                className="py-2 px-4 focus:outline-none bg-transparent"
                 type="text"
                 placeholder="Search for books..."
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={e => setInput(e.target.value)}
               />
               <button
                 type="submit"
@@ -174,7 +159,7 @@ const GoogleApi = () => {
           </div>
         </div>
         <BooksList books={books} />
-        <BookCard link="http://books.google.com/books/content?id=8D4HVx0apZQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" />
+        {/* <BookCard link="http://books.google.com/books/content?id=8D4HVx0apZQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" /> */}
       </div>
     </>
   );

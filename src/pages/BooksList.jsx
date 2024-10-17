@@ -21,13 +21,12 @@ import React from "react";
 import BookCard from "../BookCard";
 
 const BooksList = ({ books }) => {
-  console.log(books)
+  console.log(books);
   return (
-    <div className="books-list">
-      {books.map((book) => (
-       <BookCard link={book.volumeInfo.imageLinks.thumbnail}/>
+    <div className="books-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+      {books.map(({ volumeInfo }) => (
+        <BookCard data={volumeInfo} />
       ))}
-      
     </div>
   );
 };
