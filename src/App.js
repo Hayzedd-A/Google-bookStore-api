@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+
+import "./App.css";
+import BookStoreApi from "./pages/BookStoreApi";
+import BooksList from "./pages/BooksList";
+import GoogleApi from "./pages/GoogleApi";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {/* Render the components */}
+      {/* <BookStoreApi /> */}
+      <GoogleApi />
+      {/* <BooksList/> */}
     </div>
   );
 }
 
 export default App;
+
