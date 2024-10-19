@@ -10,6 +10,7 @@ const GoogleApi = () => {
   const [loading, setLoading] = useState(true); // State to track loading status
   const [disabled, setDisabled] = useState(false);
   const [startIndex, setStartIndex] = useState(0); // State to keep track of the current page
+  let start = 0;
 
   // Effect to fetch books when the component mounts
   useEffect(() => {
@@ -40,12 +41,11 @@ const GoogleApi = () => {
       setLoading(false); // Set loading to false after fetching is complete
     }
   };
-  const loadMore = async () => {
+  const loadMore = async start => {
     setDisabled(true); // Disable the button while loading more books
-    // setStartIndex(prev => prev + 20);
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${
-      startIndex + 20
-    }`; // API endpoint for fetching books
+
+    console.log(start);
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${start}`; // API endpoint for fetching books
 
     try {
       const response = await fetch(url); // Fetch data from the API
@@ -87,7 +87,11 @@ const GoogleApi = () => {
           <button
             disabled={disabled}
             onClick={() => {
-              loadMore(); // Fetch new books
+              // Increment the start index to fetch new books from the next page
+              const newStartIndex = startIndex + 20;
+              setStartIndex(newStartIndex);
+              // When the button is clicked, fetch new books
+              loadMore(startIndex); // Fetch new books
             }}
             className="py-2 px-4 text-white bg-blue-500 rounded-md hover:bg-blue-600"
           >
@@ -110,7 +114,7 @@ const LoadingSpinner = () => (
 const BookList = ({ books }) => (
   <div className="books-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-4">
     {books.map(book => (
-      <BookCard key={book.id} bookInfo={book.volumeInfo} /> // Pass the entire book object as props to BookCard
+      <BookCard key={book.id} bookInfo={book.volumeInfo} id={book.id} /> // Pass the entire book object as props to BookCard
     ))}
   </div>
 );

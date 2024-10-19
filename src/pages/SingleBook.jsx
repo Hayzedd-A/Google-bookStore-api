@@ -1,5 +1,6 @@
 // SingleBook.js
 import React, { useEffect, useState } from "react";
+import imageNotFound from "../assets/images/Image-not-found.png";
 import { useParams, Link } from "react-router-dom";
 import BookCard from "../components/BookCard";
 
@@ -8,17 +9,35 @@ const SingleBook = () => {
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [imageLink, setImageLink] = useState("");
+  const [publisherInfo, setPublisherInfo] = useState("");
+  const [description, setDescription] = useState("");
+  const [publishedDate, setPublishedDate] = useState("");
+
   useEffect(() => {
     fetchBookDetails();
+    // if (book.authors?.length > 3) {
+    //   book.authors.length = 3; // Limit the number of authors to 3
+    //   book.authors[2] += " and others"; // Add "and others" to indicate more authors
+    // }
   }, [id]);
 
   const fetchBookDetails = async () => {
-    const url = `https://gutendex.com/books/${id}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${id}`;
     try {
       setLoading(true);
       const res = await fetch(url);
       const data = await res.json();
-      setBook(data);
+      setBook(data.items[0].volumeInfo);
+      console.log(book);
+      setAuthor(book.authors?.join(", "));
+      setImageLink(book.imageLinks?.thumbnail ?? imageNotFound);
+      setTitle(book.title);
+      setPublishedDate(book.publishedDate);
+      setDescription(book.description || "No description available");
+      setPublisherInfo(book.publisher || "Unknown publisher");
     } catch (error) {
       console.error("Error fetching book details:", error);
     } finally {
@@ -42,13 +61,14 @@ const SingleBook = () => {
     <div className="bg-gray-300 min-h-screen p-8">
       <div className="container mx-auto flex flex-col items-center">
         <img
-          src={book.image} // Assuming the API returns an `image` field
-          alt={book.title}
+          src={imageLink} // Assuming the API returns an `image` field
+          alt={title}
           className="w-64 h-96 object-cover rounded-md mb-4"
         />
-        <h2 className="text-3xl font-bold mb-2">{book.title}</h2>
-        <p className="text-lg mb-2">Author(s): {book.authors.join(", ")}</p>
-        <p className="text-gray-700 text-base mb-4">{book.description}</p>
+        <h2 className="text-3xl font-bold mb-2">{title}</h2>
+        <p className="text-lg mb-2">Author(s): {author}</p>
+        <p className="text-lg mb-2">Publisher : {publisherInfo}</p>
+        <p className="text-gray-700 text-base mb-4">{description}</p>
         <Link
           to="/"
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
@@ -56,7 +76,6 @@ const SingleBook = () => {
           Home
         </Link>
       </div>
-      <BookCard />
     </div>
   );
 };

@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Navigation links array
-let links = [
-  { name: "HOME", Link: "./" }, // Currently only the "HOME" link is defined
-];
+// let links = [
+//   { name: "HOME", Link: "./" }, // Currently only the "HOME" link is defined
+// ];
 
 const BookStoreNav = ({ input, setInput }) => {
   // State for toggling mobile menu
@@ -17,7 +16,7 @@ const BookStoreNav = ({ input, setInput }) => {
   };
 
   // Function to handle search input changes
-  const searchBook = (e) => {
+  const searchBook = e => {
     setInput(e.target.value); // Update the parent component's state with the input value
   };
 
@@ -60,18 +59,6 @@ const BookStoreNav = ({ input, setInput }) => {
           </button>
         </div>
         {/* Navigation links (displayed on larger screens) */}
-        <ul
-          className={`md:flex md:items-center space-x-4 font-bold ${
-            isOpen ? "block" : "hidden"
-          } md:block mt-4 md:mt-0`}
-        >
-          {links.map((link, index) => (
-            <li key={index} className="hover:text-yellow-400">
-              <a href={link.Link}>{link.name}</a>{" "}
-              {/* Renders each navigation link */}
-            </li>
-          ))}
-        </ul>
       </div>
       {/* Mobile search input (visible when the menu is open) */}
       <div
@@ -92,7 +79,3 @@ const BookStoreNav = ({ input, setInput }) => {
 };
 
 export default BookStoreNav;
-
-
-
-
