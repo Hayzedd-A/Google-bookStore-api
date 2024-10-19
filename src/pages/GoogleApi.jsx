@@ -45,7 +45,9 @@ const GoogleApi = () => {
     setDisabled(true); // Disable the button while loading more books
 
     console.log(start);
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${start}`; // API endpoint for fetching books
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${
+      start + 20
+    }`; // API endpoint for fetching books
 
     try {
       const response = await fetch(url); // Fetch data from the API
