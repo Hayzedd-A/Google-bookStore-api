@@ -1,17 +1,24 @@
+
+
 import "./App.css";
-import BookStoreApi from "./pages/BookStoreApi";
-import BooksList from "./pages/BooksList";
+// import BookStoreApi from "./pages/BookStoreNav";
 import GoogleApi from "./pages/GoogleApi";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SingleBook from "./pages/SingleBook";
 
 function App() {
   return (
-    <div className="">
-      {/* Render the components */}
-      {/* <BookStoreApi /> */}
-      <GoogleApi />
-      {/* <BooksList/> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<GoogleApi />} />
+        <Route path="/:id" element={<SingleBook />} />
+
+        {/* Render the components */}
+        {/* <BookStoreApi /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
