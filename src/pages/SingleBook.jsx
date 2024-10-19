@@ -1,8 +1,7 @@
-
 // SingleBook.js
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import BookCard from "../BookCard";
+import BookCard from "../components/BookCard";
 
 const SingleBook = () => {
   const { id } = useParams(); // Get the book ID from the URL
@@ -50,69 +49,19 @@ const SingleBook = () => {
         <h2 className="text-3xl font-bold mb-2">{book.title}</h2>
         <p className="text-lg mb-2">Author(s): {book.authors.join(", ")}</p>
         <p className="text-gray-700 text-base mb-4">{book.description}</p>
-        <Link to="/" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+        <Link
+          to="/"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        >
           Home
         </Link>
       </div>
-      <BookCard/>
+      <BookCard />
     </div>
   );
 };
 
 export default SingleBook;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
@@ -140,7 +89,7 @@ export default SingleBook;
 //     } catch (error) {
 //       console.error("Error fetching books:", error);
 //     }
-    
+
 //   };
 
 //   return (

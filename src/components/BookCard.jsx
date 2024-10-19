@@ -1,18 +1,21 @@
-
-
-
 import React from "react";
 import { Link } from "react-router-dom";
+import imageNotFound from "../assets/images/Image-not-found.png";
 
-function BookCard({ authors, title, formats, to }) {
-  console.log(authors, "authors");
-
-  const author = authors[0];
-  const imageLink = formats["image/jpeg"];
+// assign bookInfo to book
+function BookCard({ bookInfo: book }) {
+  if (book.authors?.length > 3) {
+    book.authors.length = 3; // Limit the number of authors to 3
+    book.authors[2] += " and others"; // Add "and others" to indicate more authors
+  }
+  const author = book.authors?.join(", ");
+  const imageLink = book.imageLinks?.thumbnail ?? imageNotFound;
+  const title = book.title;
+  const publishedDate = book.publishedDate;
 
   return (
     <Link
-      to={to}
+      // to={to}
       className="
         border border-gray-600 drop-shadow-2xl rounded-md p-4 w-min-[15em] 
         hover:bg-white hover:text-black cursor-pointer object-cover 
@@ -25,17 +28,14 @@ function BookCard({ authors, title, formats, to }) {
       </div>
       <div>
         <div className="font-bold word-wrap">{title}</div>
-        {/* You can add more details here if needed */}
-         <div>{author ? author.name : "Unknown Author"}</div>
+        <div>{author ?? "Unknown Author"}</div>
+        <span>{publishedDate}</span>
       </div>
     </Link>
   );
 }
 
 export default BookCard;
-
-
-
 
 // // BookCard.js
 // import React from "react";
@@ -49,8 +49,8 @@ export default BookCard;
 //     <Link
 //       to={`/books/${id}`} // Link to the SingleBook component using the book ID
 //       className="
-//         border border-gray-600 drop-shadow-2xl rounded-md p-4 w-min-[15em] 
-//         hover:bg-white hover:text-black cursor-pointer object-cover 
+//         border border-gray-600 drop-shadow-2xl rounded-md p-4 w-min-[15em]
+//         hover:bg-white hover:text-black cursor-pointer object-cover
 //         transform transition-all duration-500 ease-in-out hover:scale-105
 //         ml-5
 //       "
