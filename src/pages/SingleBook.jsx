@@ -1,14 +1,15 @@
+
 // SingleBook.js
 import React, { useEffect, useState } from "react";
 import imageNotFound from "../assets/images/Image-not-found.png";
 import { useParams, Link } from "react-router-dom";
-import BookCard from "../components/BookCard";
 
 const SingleBook = () => {
   const { id } = useParams(); // Get the book ID from the URL
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // States for book details
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [imageLink, setImageLink] = useState("");
@@ -16,28 +17,28 @@ const SingleBook = () => {
   const [description, setDescription] = useState("");
   const [publishedDate, setPublishedDate] = useState("");
 
+  // Fetch book details when component mounts or ID changes
   useEffect(() => {
     fetchBookDetails();
-    // if (book.authors?.length > 3) {
-    //   book.authors.length = 3; // Limit the number of authors to 3
-    //   book.authors[2] += " and others"; // Add "and others" to indicate more authors
-    // }
   }, [id]);
 
+  // Function to fetch book details from the API
   const fetchBookDetails = async () => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${id}`;
     try {
       setLoading(true);
       const res = await fetch(url);
       const data = await res.json();
-      setBook(data.items[0].volumeInfo);
-      console.log(book);
-      setAuthor(book.authors?.join(", "));
-      setImageLink(book.imageLinks?.thumbnail ?? imageNotFound);
-      setTitle(book.title);
-      setPublishedDate(book.publishedDate);
-      setDescription(book.description || "No description available");
-      setPublisherInfo(book.publisher || "Unknown publisher");
+      const bookData = data.items[0].volumeInfo;
+      
+      // Set book details to state
+      setBook(bookData);
+      setAuthor(bookData.authors?.join(", "));
+      setImageLink(bookData.imageLinks?.thumbnail ?? imageNotFound);
+      setTitle(bookData.title);
+      setPublishedDate(bookData.publishedDate);
+      setDescription(bookData.description || "No description available");
+      setPublisherInfo(bookData.publisher || "Unknown publisher");
     } catch (error) {
       console.error("Error fetching book details:", error);
     } finally {
@@ -61,13 +62,13 @@ const SingleBook = () => {
     <div className="bg-gray-300 min-h-screen p-8">
       <div className="container mx-auto flex flex-col items-center">
         <img
-          src={imageLink} // Assuming the API returns an `image` field
+          src={imageLink}
           alt={title}
           className="w-64 h-96 object-cover rounded-md mb-4"
         />
         <h2 className="text-3xl font-bold mb-2">{title}</h2>
         <p className="text-lg mb-2">Author(s): {author}</p>
-        <p className="text-lg mb-2">Publisher : {publisherInfo}</p>
+        <p className="text-lg mb-2">Publisher: {publisherInfo}</p>
         <p className="text-gray-700 text-base mb-4">{description}</p>
         <Link
           to="/"
@@ -82,49 +83,3 @@ const SingleBook = () => {
 
 export default SingleBook;
 
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-
-// function SingleBook() {
-//   const { id } = useParams();
-
-//   const [books, setBooks] = useState({});
-
-//   useEffect(() => {
-//     getBooks();
-//   }, []);
-
-//   const getBooks = async () => {
-//     const url = `https://gutendex.com/books/${id}`;
-//     try {
-//       const res = await fetch(url);
-//       const data = await res.json();
-//       if (data) {
-//         console.log(data, "data");
-//         setBooks(data);
-//       } else {
-//         setBooks([]); // Clear the list if no items are found
-//       }
-//     } catch (error) {
-//       console.error("Error fetching books:", error);
-//     }
-
-//   };
-
-//   return (
-//     <div>
-//       <div>
-//         <img src="" alt="" />
-//       </div>
-//       <div>
-//         <div>ggdhdfhfbe</div>
-//         <div>cguc</div>
-//         <div></div>
-//         <div></div>
-//         <div></div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default SingleBook;
