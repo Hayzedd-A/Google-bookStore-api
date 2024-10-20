@@ -57,9 +57,13 @@ const SingleBook = () => {
   if (!book) {
     return <div className="text-center">Book not found</div>;
   }
-
+// f5f0e1;
+// f6ead4;
   return (
-    <div className="bg-gray-300 min-h-screen p-8">
+    <div
+      className=" min-h-screen p-8"
+      style={{ backgroundColor: "#f5f0e1" }} // Replace with your desired color
+    >
       <div className="container mx-auto flex flex-col items-center">
         <img
           src={imageLink}
