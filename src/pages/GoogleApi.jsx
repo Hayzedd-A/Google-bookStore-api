@@ -1,4 +1,3 @@
-
 // GoogleApi.js
 import React, { useEffect, useState } from "react";
 import BookCard from "../components/BookCard"; // Importing BookCard component to display individual book details
@@ -43,7 +42,9 @@ const GoogleApi = () => {
   const loadMore = async (start) => {
     setDisabled(true); // Disable the button while loading more books
 
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${start + 20}`; // API endpoint for fetching more books
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=20&startIndex=${
+      start + 20
+    }`; // API endpoint for fetching more books
 
     try {
       const response = await fetch(url); // Fetch data from the API
@@ -63,8 +64,11 @@ const GoogleApi = () => {
   // Render component
   return (
     <div className="p-b-8">
-      <BookStoreNav input={input} setInput={setInput} /> {/* Render navigation bar with input state */}
-      <div className="mt-40"> {/* Adjusted the margin to accommodate navbar */}
+      <BookStoreNav input={input} setInput={setInput} />{" "}
+      {/* Render navigation bar with input state */}
+      <div className="mt-40">
+        {" "}
+        {/* Adjusted the margin to accommodate navbar */}
         {loading ? ( // Show the spinner if loading is true
           <LoadingSpinner />
         ) : (

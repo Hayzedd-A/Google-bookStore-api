@@ -10,7 +10,7 @@ IBRAHIM's Bookstore is a web application that allows users to search for books u
 - Google Books API
 
 ## Setup Instructions
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone <https://github.com/proper7020/bookstore-task.git>`
 2. Navigate to the project directory: `cd my-project`
 3. Install dependencies: `npm install`
 4. Run the application: `npm start`

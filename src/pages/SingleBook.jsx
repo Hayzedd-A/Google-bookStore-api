@@ -1,4 +1,3 @@
-
 // SingleBook.js
 import React, { useEffect, useState } from "react";
 import imageNotFound from "../assets/images/Image-not-found.png";
@@ -30,7 +29,7 @@ const SingleBook = () => {
       const res = await fetch(url);
       const data = await res.json();
       const bookData = data.items[0].volumeInfo;
-      
+
       // Set book details to state
       setBook(bookData);
       setAuthor(bookData.authors?.join(", "));
@@ -57,8 +56,8 @@ const SingleBook = () => {
   if (!book) {
     return <div className="text-center">Book not found</div>;
   }
-// f5f0e1;
-// f6ead4;
+  // f5f0e1;
+  // f6ead4;
   return (
     <div
       className=" min-h-screen p-8"
@@ -86,4 +85,3 @@ const SingleBook = () => {
 };
 
 export default SingleBook;
-
