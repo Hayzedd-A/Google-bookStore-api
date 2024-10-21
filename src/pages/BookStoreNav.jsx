@@ -20,7 +20,7 @@ const BookStoreNav = ({ input, setInput }) => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo with link to the homepage */}
         <Link to="/" className="text-5xl font-bold">
-          IBRAHIM's Bookstore
+          BOOK STORE
         </Link>
         <div className="flex items-center space-x-4">
           {/* Desktop search input, hidden on smaller screens */}
@@ -29,8 +29,8 @@ const BookStoreNav = ({ input, setInput }) => {
             type="text"
             placeholder="Search for books..."
             // value={input}
-            onChange={(e) => setSearchOpen(e.target.value)}
-            onKeyUp={(e) => e.key === "Enter" && searchBook()}
+            onChange={e => setSearchOpen(e.target.value)}
+            onKeyUp={e => e.key === "Enter" && searchBook()}
           />
           {/* Hamburger menu button for mobile view */}
           <button
